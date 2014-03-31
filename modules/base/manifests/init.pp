@@ -20,7 +20,7 @@ class base{
   }
   
   exec { 'helloworld':
-    command => 'sh /tmp/helloworld.sh',
+    command => '/bin/sh /tmp/helloworld.sh',
     require => File['/tmp/helloworld.sh']
   }
 }
