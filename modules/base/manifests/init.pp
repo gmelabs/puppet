@@ -15,7 +15,7 @@ class base{
   
   file { '/tmp/helloworld.sh':
     source  => "puppet:///modules/base/helloworld.sh",
-    mode    => "700",
+    mode    => "777",
     require => Service['tomcat6'],
   }
   
