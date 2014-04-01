@@ -1,13 +1,20 @@
 class base{
   
+  service {'iptables':
+    ensure =>stopped;
+    
+  }
+  
   package { 'tomcat6':
     ensure => installed,
+    require => Service['iptables'],
   }
   
   service { 'tomcat6':
     ensure => running,
     require => Package['tomcat6'],
   }
+    
   
   package { 'git':
     ensure => installed,
