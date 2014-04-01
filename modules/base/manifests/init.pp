@@ -15,6 +15,9 @@ class base{
     require => Package['tomcat6'],
   }
     
+  package {'java-1.7.0-openjdk-devel':
+    ensure => installed,   
+  }  
   
   package { 'git':
     ensure => installed,
