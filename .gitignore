@@ -1,1 +1,3 @@
 /.git
+/modules/base/files/nexus.properties
+/modules/*/files/*{LOCAL}.properties
