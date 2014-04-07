@@ -23,10 +23,16 @@ class base{
     ensure => installed,
   }
   
+  file { '/tmp/nexus.properties':
+    source  => "puppet:///modules/base/nexus.properties",
+    mode    => "666",
+    require => Service['tomcat6'],
+  }
+  
   file { '/tmp/helloworld.sh':
     source  => "puppet:///modules/base/helloworld.sh",
     mode    => "777",
-    require => Service['tomcat6'],
+    require => File['/tmp/nexus.properties'],
   }
   
   exec { 'helloworld':
