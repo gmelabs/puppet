@@ -10,7 +10,7 @@ FIND_ARTIFACTID=testweb
 FIND_REPOSITORYID=snapshots
 FIND_FILETYPE=war
 
-NEXUS_URL=`cat nexus.properties | gawk -F'=' '/^NEXUS_URL/{print $2}'`
+NEXUS_URL=`cat nexus.properties | gawk -F'=' '/^NEXUS_URL/{print $2}' | sed 's/\r//g'`
 
 FIND_PATH=`curl -X GET -u admin:admin123 -H "Accept: application/xml" "http://${NEXUS_URL}/nexus/service/local/artifact/maven/resolve?g=${FIND_GROUPID}&a=${FIND_ARTIFACTID}&v=LATEST&r=${FIND_REPOSITORYID}&p=${FIND_FILETYPE}" 2>/dev/null | gawk -F'[<>]' '/\<repositoryPath\>/{ print $3 }'`
 
