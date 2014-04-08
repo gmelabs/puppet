@@ -2,7 +2,6 @@ class base{
   
   service {'iptables':
     ensure =>stopped;
-    
   }
   
   package { 'tomcat6':
@@ -16,27 +15,32 @@ class base{
   }
     
   package {'java-1.7.0-openjdk-devel':
-    ensure => installed,   
+    ensure => installed,
   }  
   
   package { 'git':
     ensure => installed,
   }
   
-  file { '/tmp/nexus.properties':
+  file { 'nexus.properties':
+    ensure  => file,
+    path    => '/tmp/nexus.properties',
     source  => "puppet:///modules/base/nexus.properties",
-    mode    => "666",
+    mode    => '0666',
     require => Service['tomcat6'],
   }
   
-  file { '/tmp/helloworld.sh':
+  file { 'helloworld':
+    ensure  => file,
+    path    => '/tmp/helloworld.sh',
     source  => "puppet:///modules/base/helloworld.sh",
-    mode    => "777",
-    require => File['/tmp/nexus.properties'],
+    mode    => '0777',
+    require => File['nexus.properties'],
   }
   
-  exec { 'helloworld':
+  exec { 'deployapp':
     command => '/bin/sh /tmp/helloworld.sh',
-    require => File['/tmp/helloworld.sh']
+    require => File['helloworld', 'nexus.properties'],
+    #subscribe => File['nexus.properties'],
   }
 }
