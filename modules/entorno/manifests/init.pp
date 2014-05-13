@@ -9,16 +9,16 @@ class entorno ($value = 'ei') {
     ensure => present,
   }
   
-  file { '/tmp/date.sh':
-    source => "puppet:///modules/entorno/date.sh",
-    mode => "777",
-  }
+#  file { '/tmp/date.sh':
+#    source => "puppet:///modules/entorno/date.sh",
+#    mode => "777",
+#  }
   
-  cron { 'date_cron':
-    command => "sh /tmp/date.sh",
-    minute => "*/2",
-    user => "vagrant",
+#  cron { 'date_cron':
+#    command => "sh /tmp/date.sh",
+#    minute => "*/2",
+#    user => "vagrant",
     
-  }
+#  }
 }
   
